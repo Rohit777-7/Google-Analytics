@@ -1,7 +1,9 @@
 import {
   Activity,
   BarChart3,
+  Filter,
   FileText,
+  Flame,
   Globe2,
   LayoutDashboard,
   LogOut,
@@ -53,6 +55,16 @@ const navigation = [
     icon: Globe2,
     id: "locations",
   },
+  {
+    label: "Heatmaps",
+    icon: Flame,
+    id: "heatmaps",
+  },
+  {
+    label: "Conversion Funnel",
+    icon: Filter,
+    id: "funnel",
+  },
 ];
 
 function Sidebar({
@@ -65,6 +77,13 @@ function Sidebar({
   const handleNavigation = (id) => {
     setActiveSection(id);
     setOpen(false);
+
+    // The dashboard is one continuous page, not separate routed views —
+    // jump to the matching section instead of switching content.
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
